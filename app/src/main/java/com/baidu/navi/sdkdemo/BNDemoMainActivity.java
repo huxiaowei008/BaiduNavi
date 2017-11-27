@@ -180,6 +180,7 @@ public class BNDemoMainActivity extends Activity {
      * 内部TTS播报状态回传handler
      */
     private Handler ttsHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             int type = msg.what;
             switch (type) {
@@ -215,7 +216,6 @@ public class BNDemoMainActivity extends Activity {
 
     public void showToastMsg(final String msg) {
         BNDemoMainActivity.this.runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
                 Toast.makeText(BNDemoMainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -270,7 +270,7 @@ public class BNDemoMainActivity extends Activity {
                 } else {
                     authinfo = "key校验失败, " + msg;
                 }
-                Log.d("BNDemoMainActivity", "onAuthResult: "+authinfo);
+                Log.d("BNDemoMainActivity", "onAuthResult: " + authinfo);
                 BNDemoMainActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
@@ -279,16 +279,19 @@ public class BNDemoMainActivity extends Activity {
                     }
                 });
             }
+
             @Override
             public void initSuccess() {
                 Toast.makeText(BNDemoMainActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
                 hasInitSuccess = true;
                 initSetting();
             }
+
             @Override
             public void initStart() {
                 Toast.makeText(BNDemoMainActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void initFailed() {
                 Toast.makeText(BNDemoMainActivity.this, "百度导航引擎初始化失败", Toast.LENGTH_SHORT).show();
@@ -387,12 +390,13 @@ public class BNDemoMainActivity extends Activity {
              */
 
             for (Activity ac : activityList) {
-
+                Log.d("BNDemoMainActivity", "onJumpToNavigator: 1");
                 if (ac.getClass().getName().endsWith("BNDemoGuideActivity")) {
-
+                    Log.d("BNDemoMainActivity", "onJumpToNavigator: 2");
                     return;
                 }
             }
+            Log.d("BNDemoMainActivity", "onJumpToNavigator: 3");
             Intent intent = new Intent(BNDemoMainActivity.this, BNDemoGuideActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(ROUTE_PLAN_NODE, (BNRoutePlanNode) mBNRoutePlanNode);

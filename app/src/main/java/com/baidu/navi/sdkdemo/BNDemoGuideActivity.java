@@ -37,7 +37,7 @@ public class BNDemoGuideActivity extends Activity {
      * 
      */
     // 是否使用通用接口
-    private boolean useCommonInterface = true;
+    private boolean useCommonInterface = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,10 +230,13 @@ public class BNDemoGuideActivity extends Activity {
                 @Override
                 public void handleMessage(android.os.Message msg) {
                     if (msg.what == MSG_SHOW) {
+                        Log.d(TAG, "handleMessage: MSG_SHOW");
                         addCustomizedLayerItems();
                     } else if (msg.what == MSG_HIDE) {
+                        Log.d(TAG, "handleMessage: MSG_HIDE");
                         BNRouteGuideManager.getInstance().showCustomizedLayer(false);
                     } else if (msg.what == MSG_RESET_NODE) {
+                        Log.d(TAG, "handleMessage: MSG_RESET_NODE");
                         BNRouteGuideManager.getInstance().resetEndNodeInNavi(
                                 new BNRoutePlanNode(116.21142, 40.85087, "百度大厦11", null, CoordinateType.GCJ02));
                     }
